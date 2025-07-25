@@ -1,4 +1,5 @@
 import React from "react";
+import LinkIcon from "../assets/LinkIcon";
 
 const data = [
   {
@@ -62,7 +63,7 @@ const projects = [
 const CodingCompetitions = () => {
   return (
     <div className="flex flex-col w-full h-full">
-      <p className="lg:text-5xl text-3xl xl:text-6xl font-[poppins] font-semibold">Sport Programming</p>
+      <p className="lg:text-5xl text-3xl xl:text-6xl font-[poppins] font-semibold dark:text-white">Sport Programming</p>
       <div className="flex w-full grid grid-cols-2 lg:grid-cols-4  sm:grid-cols-1 md:grid-cols-2 gap-5 lg:gap-10 mt-10 mb-20">
         {data.map((platform) => (
           <CodingCard
@@ -75,7 +76,7 @@ const CodingCompetitions = () => {
           />
         ))}
       </div>
-      <p className="lg:text-5xl text-3xl xl:text-6xl font-[poppins] font-semibold">Projects</p>
+      <p className="lg:text-5xl text-3xl xl:text-6xl font-[poppins] font-semibold dark:text-white">Projects</p>
       <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-10 lg:gap-20 mt-10 mb-10">
         {projects.map((project) => (
           <ProjectsList key={project.key} name={project.name} description={project.description} link={project.link} />
@@ -87,20 +88,17 @@ const CodingCompetitions = () => {
 
 const CodingCard = ({ name, rating, problemsSolved, link }) => {
   return (
-    <div className="flex flex-col shadow-xl text-md xl:text-xl w-full h-full bg-white rounded-3xl font-[poppins] text-bold p-8">
-      <div>
+    <div className="relative flex flex-col shadow-xl text-md xl:text-xl w-full h-full bg-white rounded-3xl font-[poppins] text-bold p-8 dark:bg-gray-900">
+      <a href={link} className="absolute top-8 right-8 text-blue-600" target="_blank" rel="noopener noreferrer">
+        <LinkIcon className="w-6 h-6" />
+      </a>
+      <div className="dark:text-white">
         <ul>
           <li>
             <p className="font-semibold">{name}</p>
           </li>
           <li>Rating: {rating}</li>
           <li>Problems Solved: {problemsSolved}</li>
-          <li>
-            <a href={link} className="text-blue-600 font-[poppins]" target="_blank" rel="noopener noreferrer">
-              {" "}
-              Profile Link
-            </a>
-          </li>
         </ul>
       </div>
     </div>
@@ -109,20 +107,16 @@ const CodingCard = ({ name, rating, problemsSolved, link }) => {
 
 const ProjectsList = ({ name, description, link }) => {
   return (
-    <div className="text-gray-800 flex shadow-xl text-md xl:text-xl rounded-3xl p-10">
-      <ul>
-        <li>
-          <p className="font-semibold font-[poppins]">{name}</p>
-        </li>
-        <ul className="flex flex-col list-disc list-inside">
+    <div className="relative text-gray-800 flex shadow-xl text-md xl:text-xl rounded-3xl p-10 dark:bg-gray-900">
+      <a href={link} className="absolute top-10 right-10 text-blue-600" target="_blank" rel="noopener noreferrer">
+        <LinkIcon className="w-6 h-6" />
+      </a>
+      <div className="dark:text-white">
+        <p className="font-semibold font-[poppins]">{name}</p>
+        <ul className="list-disc list-inside">
           <li className="text-wrap">{description}</li>
-          <li>
-            <a href={link} className="text-blue-600 font-[poppins]" target="_blank" rel="noopener noreferrer">
-              Go to project repo
-            </a>
-          </li>
         </ul>
-      </ul>
+      </div>
     </div>
   );
 };

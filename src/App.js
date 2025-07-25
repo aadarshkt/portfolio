@@ -5,28 +5,31 @@ import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Skills from "./components/Skills";
 import Cover from "./components/Cover";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   return (
-    <div className="flex flex-col">
-      <div className="h-screen flex flex-col p-10 mb-40 sm:mb-20 md:mb-32">
+    <ThemeProvider>
+      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200 relative">
         <Cover />
-        <Header />
-        <Body />
+        <div className="relative z-10">
+          <Header />
+          <Body />
+        </div>
       </div>
-      <div className="flex p-10 z-20 bg-white">
+      <div className="flex p-10 bg-white dark:bg-gray-800 relative z-10">
         <About />
       </div>
-      <div className="flex p-10 z-20 bg-white">
+      <div className="flex p-10 bg-gray-50 dark:bg-gray-900 relative z-10">
         <Skills />
       </div>
-      <div className="flex p-10 z-20 bg-white">
+      <div className="flex p-10 bg-white dark:bg-gray-800 relative z-10">
         <CodingCompetitions />
       </div>
-      <div className="flex p-10 w-full bg-gray-800 z-20 bg-opacity-80">
+      <div className="flex p-10 w-full bg-gray-800 dark:bg-gray-900 relative z-10">
         <Contact />
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

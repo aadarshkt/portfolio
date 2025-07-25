@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
+import ThemeContext from "../context/ThemeContext";
 
 const Cover = () => {
+  const { theme } = useContext(ThemeContext);
   const [, setInit] = useState(false);
 
   // this should be run only once per application lifetime
@@ -24,14 +26,14 @@ const Cover = () => {
     console.log(container);
   };
   return (
-    <div id="particle-js">
+    <div id="particle-js" className="absolute inset-0 w-full h-full">
       <Particles
         id="tsparticles"
         particlesLoaded={particlesLoaded}
         options={{
           background: {
             color: {
-              value: "#fff",
+              value: "transparent",
             },
           },
           fpsLimit: 120,
@@ -59,13 +61,13 @@ const Cover = () => {
           },
           particles: {
             color: {
-              value: "#000000",
+              value: theme === "dark" ? "#ffffff" : "#000000",
             },
             links: {
-              color: "#000000",
+              color: theme === "dark" ? "#ffffff" : "#000000",
               distance: 250,
               enable: true,
-              opacity: 0.5,
+              opacity: 0.3,
               width: 1,
             },
             move: {
@@ -81,12 +83,12 @@ const Cover = () => {
             number: {
               density: {
                 enable: true,
-                area: 800,
+                area: 400,
               },
               value: 60,
             },
             opacity: {
-              value: 0.5,
+              value: 0.3,
             },
             shape: {
               type: "circle",
@@ -98,7 +100,6 @@ const Cover = () => {
           detectRetina: true,
         }}
       />
-      <div className="z-20">Hello</div>
     </div>
   );
 };

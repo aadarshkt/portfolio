@@ -8,17 +8,12 @@ import MongoDB from "../assets/MongoDB";
 import TailwindCSS from "../assets/TailwindCSS";
 import ReactJS from "../assets/ReactJS";
 import NodeJS from "../assets/NodeJS";
-import {
-  Player,
-  Controls,
-} from "@lottiefiles/react-lottie-player";
+import { Player, Controls } from "@lottiefiles/react-lottie-player";
 
 const Skills = () => {
   return (
     <div className="flex flex-col">
-      <p className="lg:text-5xl text-3xl xl:text-6xl text-gray-800 font-[poppins] font-semibold">
-        Skills
-      </p>
+      <p className="lg:text-5xl text-3xl xl:text-6xl text-gray-800 font-[poppins] font-semibold dark:text-white">Skills</p>
       <div className="flex lg:flex-row flex-col items-center">
         <div className="flex lg:w-2/3 w-full xl:w-full">
           <Player
@@ -29,15 +24,7 @@ const Skills = () => {
               height: "100%",
               width: "100%",
             }}>
-            <Controls
-              visible={false}
-              buttons={[
-                "play",
-                "repeat",
-                "frame",
-                "debug",
-              ]}
-            />
+            <Controls visible={false} buttons={["play", "repeat", "frame", "debug"]} />
           </Player>
         </div>
         <div className="flex justify-center w-full lg:w-1/2 xl:w-full">
