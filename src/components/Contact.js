@@ -1,6 +1,5 @@
 import React from "react";
 import LinkedInLogo from "../assets/LinkedInLogo";
-import TwitterLogo from "../assets/TwitterLogo";
 import GitHubLogo from "./GitHubLogo";
 
 const Contact = () => {
