@@ -36,28 +36,28 @@ npm run typecheck  # tsc --noEmit
 
 | Export | What it controls |
 |---|---|
-| `profile` | Name, monogram, role, company, alumni, email, avatar, resume link, hero copy |
+| `profile` | Name, role, company, alumni, email, location, avatar, résumé link, hero copy |
 | `stats` | The four hero numbers |
 | `navLinks` | Header navigation + footer links (must match the section `id`s) |
-| `socials` | Footer/hero icon links |
+| `socials` | Footer links (label + icon) |
 | `about` | Bio paragraphs + a short highlight line |
-| `skills` | Skill grid — `{ name, icon }` |
-| `toolbelt` | Extra technology names, listed as plain text under the grid |
-| `experience` | Work rows — **placeholder, replace with real roles** |
-| `education` | Education rows — **placeholder** |
-| `projects` | Project cards — `name`, `description`, `tags`, `link` |
+| `skillGroups` | Skills, grouped by category — `{ title, items[] }` |
+| `experience` | Work history rows |
+| `education` | Education rows |
+| `projects` | Project cards — `name`, `description`, `tags`, optional `link` |
 | `competitive` | Ratings table (rating + problems solved) |
-| `achievements` | Awards/certifications — **placeholder** |
-| `testimonials` | Client quotes — **placeholder** |
+| `achievements` | Ranks and awards |
+| `openSource` | Open-source contributions, shown under Achievements |
 
-Anything marked **placeholder** is scaffolding meant to be replaced. Entries carrying
-`PLACEHOLDER` text are intentional stubs.
+All content reflects Aadarsh's actual résumé. To update a claim, edit the value here —
+no component changes are needed.
 
 ### Swapping the résumé and photo
 
-- Résumé: replace `public/Aadarsh_Kumar_Tiwari_Resume.pdf` (keep the name, or update
-  `profile.resumeUrl`).
-- Photo: replace `src/assets/Profile_photo.png`.
+- **Résumé:** the "View resume" button points at a Google Doc — set `profile.resumeUrl` in
+  `src/data/portfolio.ts`. The document must be shared as *"Anyone with the link can view"*,
+  otherwise visitors hit a request-access wall.
+- **Photo:** replace `src/assets/Profile_photo.png`.
 
 ### Adding a section
 
@@ -129,7 +129,7 @@ src/
     BackToTop.tsx  ThemeToggle.tsx
     common/                    Section, SectionHeading, Reveal
   assets/                      SVG icon components + profile photo
-public/                        favicon + résumé PDF
+public/                        favicon
 ```
 
 `Experience`, `Experience`'s education block, `Achievements` and `Testimonials` are all

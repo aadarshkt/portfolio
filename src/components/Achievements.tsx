@@ -1,4 +1,4 @@
-import { achievements } from "@/data/portfolio";
+import { achievements, openSource } from "@/data/portfolio";
 import Section from "./common/Section";
 import SectionHeading from "./common/SectionHeading";
 
@@ -17,6 +17,17 @@ export default function Achievements() {
               <p className="mt-1 text-sm text-secondary">{achievement.issuer}</p>
               <p className="mt-3 text-sm leading-relaxed text-secondary">{achievement.detail}</p>
             </div>
+          </li>
+        ))}
+      </ol>
+
+      <h3 className="eyebrow mt-16">Open source</h3>
+
+      <ol className="mt-6 border-t border-line">
+        {openSource.map((contribution) => (
+          <li key={contribution.id} className="border-b border-line py-6">
+            <h4 className="text-base text-primary">{contribution.project}</h4>
+            <p className="mt-3 text-sm leading-relaxed text-secondary">{contribution.detail}</p>
           </li>
         ))}
       </ol>

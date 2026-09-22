@@ -21,7 +21,7 @@ export default function Header() {
     if (!menuOpen) return;
 
     const closeOnDesktop = () => {
-      if (window.innerWidth >= 768) setMenuOpen(false);
+      if (window.innerWidth >= 1024) setMenuOpen(false);
     };
 
     window.addEventListener("resize", closeOnDesktop);
@@ -34,12 +34,15 @@ export default function Header() {
         scrolled ? "border-line bg-page/85 backdrop-blur-md" : "border-transparent"
       }`}>
       <div className="container-x">
-        <div className="flex h-16 items-center justify-between gap-6">
-          <a href="#top" className="text-sm font-medium tracking-tight text-primary">
+        <div className="flex h-16 items-center justify-between gap-4 sm:gap-6">
+          <a
+            href="#top"
+            className="text-sm font-medium tracking-tight whitespace-nowrap text-primary"
+            aria-label="Back to top">
             {profile.name}
           </a>
 
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.id}
@@ -67,7 +70,7 @@ export default function Header() {
               onClick={() => setMenuOpen((open) => !open)}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
-              className="-mr-2 flex h-9 w-9 items-center justify-center text-secondary transition-colors duration-200 hover:text-primary md:hidden">
+              className="-mr-2 flex h-9 w-9 items-center justify-center text-secondary transition-colors duration-200 hover:text-primary lg:hidden">
               <svg
                 viewBox="0 0 24 24"
                 className="h-5 w-5"
@@ -84,7 +87,7 @@ export default function Header() {
       </div>
 
       {menuOpen ? (
-        <nav className="border-t border-line bg-page md:hidden">
+        <nav className="border-t border-line bg-page lg:hidden">
           <div className="container-x flex flex-col py-2">
             {navLinks.map((link) => (
               <a

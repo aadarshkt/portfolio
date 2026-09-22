@@ -1,17 +1,8 @@
 import type { ComponentType } from "react";
 
-import CPlusPlus from "@/assets/CPlusPlus";
-import CSS3 from "@/assets/CSS3";
-import Express from "@/assets/Express";
 import GitHubLogo from "@/assets/GitHubLogo";
-import HTML5 from "@/assets/HTML5";
-import Javascript from "@/assets/Javascript";
 import LinkedInLogo from "@/assets/LinkedInLogo";
-import MongoDB from "@/assets/MongoDB";
-import NodeJS from "@/assets/NodeJS";
 import ProfilePhoto from "@/assets/Profile_photo.png";
-import ReactJS from "@/assets/ReactJS";
-import TailwindCSS from "@/assets/TailwindCSS";
 
 export type IconComponent = ComponentType<{ className?: string }>;
 
@@ -22,23 +13,26 @@ export const profile = {
   name: "Aadarsh Kumar Tiwari",
   shortName: "Aadarsh",
   role: "Software Engineer",
-  company: "KPIT",
+  company: "KPIT Technologies",
   alumni: "IIT (ISM) Dhanbad",
-  location: "India",
+  location: "Bengaluru, India",
   email: "aadarshkt1729@gmail.com",
   avatar: ProfilePhoto,
-  resumeUrl: "/Aadarsh_Kumar_Tiwari_Resume.pdf",
-  availability: "Open to new opportunities",
-  headline: "Software engineer at KPIT, alumnus of IIT (ISM) Dhanbad.",
+  resumeUrl:
+    "https://docs.google.com/document/d/12KYQwS1bdpVX4gGDIBZDppsHf_M-vPlxyHQaIFdXKOM/export?format=pdf",
+  /** Position statement, shown as the hero eyebrow. */
+  focus: "Backend · AI Systems · Deployment",
+  availability: "Open to backend and AI engineering roles",
+  headline: "I build distributed backends and the AI systems that run on top of them.",
   subheadline:
-    "I build web products end to end — from the details in the interface to the services behind them. Lately I've been focused on React, Node and the small decisions that make software feel considered.",
+    "Software engineer at KPIT Technologies, Bengaluru. I work on multi-agent orchestration for automotive workflows — high-throughput services on Kafka and RabbitMQ, LangGraph pipelines, and the Docker and AWS plumbing that ships them.",
 };
 
 export const stats = [
-  { label: "Years of experience", value: "3+" },
-  { label: "Problems solved", value: "800+" },
-  { label: "Projects shipped", value: "15+" },
-  { label: "Technologies", value: "20+" },
+  { value: "2+", label: "Years of backend engineering" },
+  { value: "20+", label: "Microservices in production" },
+  { value: "50%", label: "Lower MTTR on CI/CD incidents" },
+  { value: "1000+", label: "Problems solved" },
 ];
 
 /* ------------------------------------------------------------------ *
@@ -61,58 +55,50 @@ export const socials: Social[] = [
 ];
 
 /* ------------------------------------------------------------------ *
- *  ABOUT — paragraphs rendered in order
+ *  ABOUT
  * ------------------------------------------------------------------ */
 export const about = {
   eyebrow: "About",
-  title: "A little about me",
+  title: "Backend systems, agentic AI, and shipping both",
   paragraphs: [
-    "Welcome to my corner of the internet. I'm Aadarsh Kumar Tiwari, a software engineer at KPIT and an alumnus of IIT (ISM) Dhanbad.",
-    "I love building things that make a difference — clean interfaces, solid backends, and the small details people feel but never notice. I believe digital superintelligence is the next step of evolution, and I'd like to help shape it responsibly.",
-    "When I'm not shipping, you'll find me grinding competitive programming problems, reading about systems design, or chasing a good sunset.",
+    "I'm a software engineer at KPIT Technologies in Bengaluru. I work on Kineto Labs, a multi-agent platform that carries an automotive feature from creation all the way to deployment on hardware inside in-vehicle infotainment systems.",
+    "Most of my work lives behind the API. I architected an asynchronous notification service on RabbitMQ and PostgreSQL that decouples rule evaluation from dispatch, built high-concurrency catalog APIs serving 1000+ users, and wrote a Spring Boot and Kafka microservice that reads 500+ GitLab pipeline logs a day to surface AI-driven debugging insights — cutting mean time to resolution on CI/CD incidents by roughly half.",
+    "On the AI side I build the orchestration layer rather than just calling a model: tool-using LLM agents, retrieval grounded in vector search, and human-in-the-loop checkpoints so a person stays in control of anything consequential.",
+    "I'm deliberate about deployment too — Docker, AWS, and enough Kubernetes to ship and debug a service myself — though I'd call that the newest part of my toolkit rather than the strongest. Before KPIT I studied Electronics and Communication Engineering at IIT (ISM) Dhanbad, where competitive programming taught me to care about complexity and correctness.",
   ],
-  highlights: ["Systems design", "Product craft", "Competitive programming", "AI & tooling"],
+  highlights: ["Distributed systems", "Event-driven architecture", "Agentic AI & RAG", "Cloud deployment"],
 };
 
 /* ------------------------------------------------------------------ *
- *  SKILLS — icon + name. Add or remove freely.
+ *  SKILLS — grouped by how I actually use them
  * ------------------------------------------------------------------ */
-export type Skill = { name: string; icon: IconComponent };
+export type SkillGroup = { title: string; items: string[] };
 
-export const skills: Skill[] = [
-  { name: "HTML5", icon: HTML5 },
-  { name: "CSS3", icon: CSS3 },
-  { name: "JavaScript", icon: Javascript },
-  { name: "React", icon: ReactJS },
-  { name: "Node.js", icon: NodeJS },
-  { name: "Express", icon: Express },
-  { name: "MongoDB", icon: MongoDB },
-  { name: "Tailwind CSS", icon: TailwindCSS },
-  { name: "C++", icon: CPlusPlus },
-];
-
-/** Extra tools, listed as plain text under the skills grid */
-export const toolbelt = [
-  "TypeScript",
-  "Redux",
-  "Next.js",
-  "REST APIs",
-  "GraphQL",
-  "Git",
-  "Docker",
-  "PostgreSQL",
-  "Redis",
-  "Firebase",
-  "AWS",
-  "Python",
-  "Linux",
-  "Figma",
-  "Jest",
-  "CI/CD",
+export const skillGroups: SkillGroup[] = [
+  {
+    title: "Languages",
+    items: ["Python", "Java", "TypeScript", "JavaScript", "C++", "SQL"],
+  },
+  {
+    title: "Backend & Frameworks",
+    items: ["FastAPI", "Spring Boot", "REST APIs", "Node.js", "Celery", "Next.js"],
+  },
+  {
+    title: "AI & Agents",
+    items: ["LangGraph", "LLM & VLM Agents", "RAG", "pgvector", "MCP", "Tool Calling"],
+  },
+  {
+    title: "Data & Messaging",
+    items: ["PostgreSQL", "Redis", "Apache Kafka", "RabbitMQ", "MongoDB"],
+  },
+  {
+    title: "Infra & Deployment",
+    items: ["Docker", "Kubernetes", "AWS (ECS, S3, RDS, ElastiCache)", "GitLab CI/CD", "Linux", "Git"],
+  },
 ];
 
 /* ------------------------------------------------------------------ *
- *  EXPERIENCE — PLACEHOLDER: replace with your real history
+ *  EXPERIENCE
  * ------------------------------------------------------------------ */
 export type Experience = {
   id: string;
@@ -129,34 +115,24 @@ export const experience: Experience[] = [
   {
     id: "kpit",
     role: "Software Engineer",
-    company: "KPIT",
-    period: "2024 — Present",
-    location: "India",
-    summary: "PLACEHOLDER — one line on what you own and the impact you had.",
+    company: "KPIT Technologies",
+    period: "Jun 2024 — Present",
+    location: "Bengaluru, India",
+    summary: "Backend services and agentic AI for automotive engineering workflows.",
     highlights: [
-      "PLACEHOLDER — a shipped outcome with a number attached (latency, adoption, revenue).",
-      "PLACEHOLDER — a technical problem you solved and how.",
-      "PLACEHOLDER — a collaboration or leadership moment.",
+      "Architected Kineto Labs, a multi-agent orchestration platform carrying automotive features from creation through to deployment on in-vehicle infotainment hardware.",
+      "Designed an asynchronous notification service on RabbitMQ and PostgreSQL, decoupling rule evaluation from dispatch to keep delivery reliable and latency low under peak load.",
+      "Built high-concurrency backend APIs for the workbench catalog service, managing 100+ workbenches for 1000+ active users.",
+      "Wrote a Spring Boot and Kafka microservice processing 500+ daily GitLab pipeline logs across 20+ microservices, surfacing AI-driven resolution suggestions.",
+      "Cut mean time to resolution for CI/CD incidents by ~50%, resolving 100+ weekly incidents and scaling adoption to 50+ clients.",
+      "Integrated LDAP authentication with role-based access control across the catalog and AIOps microservices, covering 200+ users across 10+ distinct roles.",
     ],
-    tags: ["TypeScript", "React", "Node.js"],
-  },
-  {
-    id: "internship",
-    role: "Software Engineer Intern",
-    company: "PLACEHOLDER — Company",
-    period: "2023 — 2024",
-    location: "Remote",
-    summary: "PLACEHOLDER — what the team did and your slice of it.",
-    highlights: [
-      "PLACEHOLDER — feature you built end to end.",
-      "PLACEHOLDER — measurable improvement you drove.",
-    ],
-    tags: ["React", "Express", "MongoDB"],
+    tags: ["Python", "Java", "FastAPI", "Spring Boot", "Kafka", "RabbitMQ", "PostgreSQL", "LangGraph", "Docker"],
   },
 ];
 
 /* ------------------------------------------------------------------ *
- *  EDUCATION — PLACEHOLDER details
+ *  EDUCATION
  * ------------------------------------------------------------------ */
 export type Education = {
   id: string;
@@ -169,63 +145,46 @@ export type Education = {
 export const education: Education[] = [
   {
     id: "iit-ism",
-    degree: "B.Tech — PLACEHOLDER (e.g. Computer Science)",
+    degree: "B.Tech, Electronics & Communication Engineering",
     institution: "IIT (ISM) Dhanbad",
     period: "2020 — 2024",
-    detail: "PLACEHOLDER — CGPA, societies, positions of responsibility, awards.",
-  },
-  {
-    id: "school",
-    degree: "Higher Secondary — PLACEHOLDER stream",
-    institution: "PLACEHOLDER — School name",
-    period: "2018 — 2020",
-    detail: "PLACEHOLDER — achievements that are worth mentioning.",
+    detail:
+      "Coursework in data structures and algorithms and object-oriented programming, alongside competitive programming.",
   },
 ];
 
 /* ------------------------------------------------------------------ *
- *  PROJECTS — your headline work
+ *  PROJECTS
  * ------------------------------------------------------------------ */
 export type Project = {
   id: string;
   name: string;
   description: string;
   tags: string[];
-  link: string;
+  link?: string;
 };
 
 export const projects: Project[] = [
   {
-    id: "scanx",
-    name: "ScanX — QR Student Access",
+    id: "claims",
+    name: "Agentic AI Claims Assessment",
     description:
-      "A React Native app that lets students access campus facilities by scanning a QR code, replacing manual entry registers.",
-    tags: ["React Native", "Node.js", "MongoDB"],
-    link: "https://github.com/aadarshkt/scanx_client",
+      "A production system that turns phone photos, video or LiDAR into metric floor plans and 3D point clouds, then assesses insurance claims on top of them. I built the reconstruction core — a FastAPI and Celery/Redis pipeline driving COLMAP and Open3D — plus a tool-using LLM agent orchestrating damage detection, severity scoring and cost estimation. A pgvector RAG layer grounds every finding in the policy clause it cites. Containerised on AWS and serving 500+ users.",
+    tags: ["FastAPI", "Celery", "Redis", "pgvector", "LLM / VLM Agents", "AWS", "COLMAP"],
   },
   {
-    id: "company-portal",
-    name: "Company Registration Portal",
+    id: "agent-orch",
+    name: "Agent Orchestration Platform",
     description:
-      "Implemented full CRUD functionality for job and internship postings, wired into a Node.js backend with role-based access.",
-    tags: ["React", "Node.js", "Express"],
-    link: "https://github.com/aadarshkt/CDC-company-portal",
+      "A YAML-driven platform for composing multi-agent workflows on LangGraph. Executors register themselves through a decorator and describe their own inputs in JSON Schema, so the UI builds every configuration form with no frontend changes — a type is code, a node is data. LangGraph runs synchronously on a worker thread while FastAPI's event loop stays free, with updates handed back thread-safely and streamed to the browser over SSE. Adds human-in-the-loop approvals on a PostgreSQL checkpointer, MCP tool discovery, per-agent Docker images and conditional routing between nodes.",
+    tags: ["Python", "FastAPI", "LangGraph", "PostgreSQL", "SSE", "MCP", "Docker", "Next.js"],
   },
   {
-    id: "library",
-    name: "Library Management Application",
+    id: "workflow-engine",
+    name: "Distributed Workflow Engine",
     description:
-      "A web application to manage a library's books. Titles are created, read, updated and deleted against a MySQL database via ISBN.",
-    tags: ["React", "MySQL", "REST"],
-    link: "https://github.com/aadarshkt/library_client",
-  },
-  {
-    id: "solar-flare",
-    name: "Solar Flare Detection UI",
-    description:
-      "Co-developed the interface for a system that detects solar flares in X-ray data, making a research pipeline approachable.",
-    tags: ["React", "Python", "ML"],
-    link: "https://github.com/aadarshkt/inter_iit",
+      "A high-throughput engine orchestrating DAG-based workflows, resolving dependencies with Kahn's algorithm and executing independent tasks in parallel. A self-healing scheduler built on Java virtual threads and Redis heartbeats detects node failure and re-queues stalled work without losing data, while Spring Data Redis Pub/Sub propagates state across workers in milliseconds. A pluggable task registry via the Strategy pattern and Spring Bean Factory, with JPA optimistic locking for exactly-once execution semantics.",
+    tags: ["Java", "Spring Boot", "Redis", "PostgreSQL", "Docker"],
   },
 ];
 
@@ -242,18 +201,18 @@ export type CompetitiveProfile = {
 
 export const competitive: CompetitiveProfile[] = [
   {
+    id: "leetcode",
+    name: "LeetCode",
+    rating: "1764",
+    solved: "480+",
+    link: "https://leetcode.com/aadarshkt/",
+  },
+  {
     id: "codeforces",
     name: "Codeforces",
     rating: "1364",
     solved: "400+",
     link: "https://codeforces.com/profile/aadarshkt",
-  },
-  {
-    id: "leetcode",
-    name: "LeetCode",
-    rating: "1764",
-    solved: "180+",
-    link: "https://leetcode.com/aadarshkt/",
   },
   {
     id: "codechef",
@@ -272,57 +231,43 @@ export const competitive: CompetitiveProfile[] = [
 ];
 
 /* ------------------------------------------------------------------ *
- *  ACHIEVEMENTS — PLACEHOLDER
+ *  ACHIEVEMENTS
  * ------------------------------------------------------------------ */
 export type Achievement = { id: string; title: string; issuer: string; year: string; detail: string };
 
 export const achievements: Achievement[] = [
   {
-    id: "ach-1",
-    title: "PLACEHOLDER — award or certification",
-    issuer: "PLACEHOLDER — issuer",
-    year: "2025",
-    detail: "PLACEHOLDER — one line on what it was for.",
+    id: "jee-advanced",
+    title: "Rank 4901, JEE Advanced",
+    issuer: "Out of ~25,000 candidates",
+    year: "2020",
+    detail: "India's national engineering entrance examination.",
   },
   {
-    id: "ach-2",
-    title: "PLACEHOLDER — rank or contest result",
-    issuer: "PLACEHOLDER — platform",
-    year: "2024",
-    detail: "PLACEHOLDER — one line on the result.",
-  },
-  {
-    id: "ach-3",
-    title: "PLACEHOLDER — open source or community",
-    issuer: "PLACEHOLDER — org",
-    year: "2024",
-    detail: "PLACEHOLDER — one line on your contribution.",
+    id: "cf-round-852",
+    title: "Rank 2986, Codeforces Round 852 (Div. 2)",
+    issuer: "Out of ~17,000 participants",
+    year: "2022",
+    detail: "Rated contest placing in the top fifth of the field.",
   },
 ];
 
 /* ------------------------------------------------------------------ *
- *  TESTIMONIALS — PLACEHOLDER (great for client trust)
+ *  OPEN SOURCE
  * ------------------------------------------------------------------ */
-export type Testimonial = { id: string; quote: string; name: string; title: string };
+export type OpenSourceContribution = { id: string; project: string; detail: string };
 
-export const testimonials: Testimonial[] = [
+export const openSource: OpenSourceContribution[] = [
   {
-    id: "t-1",
-    quote:
-      "PLACEHOLDER — a short, specific quote about working with you. Concrete beats generic.",
-    name: "PLACEHOLDER — Name",
-    title: "PLACEHOLDER — Role, Company",
+    id: "continue",
+    project: "Continue.dev",
+    detail:
+      "Contributed custom language-model integrations and fixed critical UI bugs in this open-source AI coding assistant.",
   },
   {
-    id: "t-2",
-    quote: "PLACEHOLDER — what they'd tell someone else considering hiring you.",
-    name: "PLACEHOLDER — Name",
-    title: "PLACEHOLDER — Role, Company",
-  },
-  {
-    id: "t-3",
-    quote: "PLACEHOLDER — a line about the outcome you delivered together.",
-    name: "PLACEHOLDER — Name",
-    title: "PLACEHOLDER — Role, Company",
+    id: "rowboat",
+    project: "Rowboat",
+    detail:
+      "Added exponential backoff to the note-tagging retry path, preventing an infinite retry loop when tagging failed.",
   },
 ];

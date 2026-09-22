@@ -1,0 +1,18 @@
+# Netlify build configuration.
+#
+# The site previously ran on Create React App, which published `build/`.
+# Vite publishes `dist/`, so the publish directory must change or deploys
+# will fail with "Deploy directory 'build' does not exist".
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Vite writes content-hashed filenames into /assets, so they can be cached
+# indefinitely. Everything else (index.html) falls back to Netlify's default.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

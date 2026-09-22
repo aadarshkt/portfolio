@@ -6,9 +6,9 @@ export default function Hero() {
     <section id="top" className="container-x pt-16 pb-20 sm:pt-24 sm:pb-28">
       <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:items-start lg:gap-16">
         <Reveal>
-          <p className="eyebrow">{profile.availability}</p>
+          <p className="eyebrow">{profile.focus}</p>
 
-          <h1 className="mt-5 text-4xl leading-[1.08] text-primary sm:text-5xl lg:text-6xl">{profile.name}</h1>
+          <h1 className="mt-5 text-[clamp(1.5rem,5.4vw,3rem)] leading-[1.06] text-primary">{profile.name}</h1>
 
           <p className="mt-5 text-lg text-primary sm:text-xl">{profile.headline}</p>
 
