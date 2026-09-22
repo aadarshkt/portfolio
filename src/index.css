@@ -1,5 +1,231 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100;1,200;1,300&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ *  Dark mode is class-driven (we toggle `.dark` on <html>)
+ * ------------------------------------------------------------------ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ *
+ *  Tokens
+ *
+ *  Surfaces are warm neutrals, not grey — a quiet nod to the sunset
+ *  reference. Colour is carried by a single accent, used sparingly.
+ * ------------------------------------------------------------------ */
+:root {
+  --page: #faf7f2;
+  --surface: #ffffff;
+  --line: rgba(28, 25, 23, 0.1);
+  --line-strong: rgba(28, 25, 23, 0.22);
+  --text-1: #1c1917;
+  --text-2: #57534e;
+  --text-3: #6e675f;
+  --accent: #b45309;
+  --accent-soft: rgba(180, 83, 9, 0.08);
+  /* text colour that sits on top of the accent fill */
+  --on-accent: #ffffff;
+  color-scheme: light;
+}
+
+.dark {
+  --page: #0c0a09;
+  --surface: #141110;
+  --line: rgba(245, 241, 236, 0.09);
+  --line-strong: rgba(245, 241, 236, 0.24);
+  --text-1: #f5f1ec;
+  --text-2: #a8a29b;
+  --text-3: #8a837c;
+  --accent: #e0913a;
+  --accent-soft: rgba(224, 145, 58, 0.1);
+  --on-accent: #1a0d02;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-primary: var(--text-1);
+  --color-secondary: var(--text-2);
+  --color-muted: var(--text-3);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+}
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Newsreader", ui-serif, Georgia, Cambria, "Times New Roman", serif;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Base
+ * ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--page);
+    /* one restrained wash of warmth at the top — no stacked layers */
+    background-image: radial-gradient(70% 45% at 72% -8%, var(--accent-soft), transparent 70%);
+    background-repeat: no-repeat;
+    color: var(--text-1);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--page);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  button,
+  a,
+  [role="button"] {
+    cursor: pointer;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ *  Primitives — deliberately few
+ * ------------------------------------------------------------------ */
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 68rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .container-x {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  .rule {
+    height: 1px;
+    width: 100%;
+    background-color: var(--line);
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  .card {
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    transition: border-color 0.2s ease;
+  }
+  .card:hover {
+    border-color: var(--line-strong);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    padding: 0.7rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .btn-primary {
+    background-color: var(--text-1);
+    color: var(--page);
+    border: 1px solid var(--text-1);
+  }
+  .btn-primary:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--text-1);
+    border: 1px solid var(--line-strong);
+  }
+  .btn-ghost:hover {
+    border-color: var(--text-1);
+  }
+
+  /* inline link with a quiet underline that grows on hover */
+  .link {
+    color: var(--text-2);
+    transition: color 0.2s ease;
+  }
+  .link:hover {
+    color: var(--accent);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ *  Scroll reveal — a small, quiet movement
+ * ------------------------------------------------------------------ */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.5s ease-out,
+      transform 0.5s ease-out;
+  }
+  .reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

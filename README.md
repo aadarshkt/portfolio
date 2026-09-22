@@ -1,70 +1,144 @@
-# Getting Started with Create React App
+# Aadarsh Kumar Tiwari — Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A minimal, typography-led single-page portfolio: warm neutral surfaces, a single amber
+accent, hairline rules instead of cards-with-shadows, and a serif/sans type pairing.
+Ships with a dark theme and a light theme.
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+| | |
+|---|---|
+| Build | **Vite 6** |
+| UI | **React 18** + **TypeScript** (strict) |
+| Styling | **Tailwind CSS v4** (CSS-first config, no `tailwind.config.js`) |
+| Type | **Newsreader** (display) + **Plus Jakarta Sans** (body) |
+| Motion | A quiet IntersectionObserver fade — no animation libraries |
 
-### `npm start`
+No runtime dependencies beyond React. Total shipped JS is ~63 KB gzip.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # type-check + production build into dist/
+npm run preview    # serve the production build
+npm run typecheck  # tsc --noEmit
+```
 
-### `npm test`
+> Note: this environment has `NODE_ENV=production` set globally, which makes npm skip
+> devDependencies. If `npm install` leaves out Vite/Tailwind/TypeScript, run
+> `npm install --include=dev`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Editing your content
 
-### `npm run build`
+**Everything you'll normally change lives in one file: [`src/data/portfolio.ts`](src/data/portfolio.ts).**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Export | What it controls |
+|---|---|
+| `profile` | Name, monogram, role, company, alumni, email, avatar, resume link, hero copy |
+| `stats` | The four hero numbers |
+| `navLinks` | Header navigation + footer links (must match the section `id`s) |
+| `socials` | Footer/hero icon links |
+| `about` | Bio paragraphs + a short highlight line |
+| `skills` | Skill grid — `{ name, icon }` |
+| `toolbelt` | Extra technology names, listed as plain text under the grid |
+| `experience` | Work rows — **placeholder, replace with real roles** |
+| `education` | Education rows — **placeholder** |
+| `projects` | Project cards — `name`, `description`, `tags`, `link` |
+| `competitive` | Ratings table (rating + problems solved) |
+| `achievements` | Awards/certifications — **placeholder** |
+| `testimonials` | Client quotes — **placeholder** |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Anything marked **placeholder** is scaffolding meant to be replaced. Entries carrying
+`PLACEHOLDER` text are intentional stubs.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Swapping the résumé and photo
 
-### `npm run eject`
+- Résumé: replace `public/Aadarsh_Kumar_Tiwari_Resume.pdf` (keep the name, or update
+  `profile.resumeUrl`).
+- Photo: replace `src/assets/Profile_photo.png`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Adding a section
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Add an entry to `navLinks` in `src/data/portfolio.ts`.
+2. Create `src/components/YourSection.tsx` using the shared wrappers:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```tsx
+import Section from "./common/Section";
+import SectionHeading from "./common/SectionHeading";
+import Reveal from "./common/Reveal";
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+export default function YourSection() {
+  return (
+    <Section id="your-id">
+      <SectionHeading eyebrow="Eyebrow" title="Your title" subtitle="Optional subtitle" />
+      <Reveal delay={80}>{/* content */}</Reveal>
+    </Section>
+  );
+}
+```
 
-## Learn More
+3. Render it inside `<main>` in `src/App.tsx`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Theming
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The palette is deliberately small: **warm neutral surfaces + one amber accent**. The
+warmth is inherited from the sunset reference artwork
+(`StockCake-Reaching_Toward_Sunset-3280376-medium.jpg`), but the saturated orange/gold is
+kept as an accent rather than splashed across the page.
 
-### Code Splitting
+Design tokens live in [`src/index.css`](src/index.css):
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- `:root` holds the **light** values, `.dark` overrides them for **dark**.
+- `@theme inline` exposes them as Tailwind utilities:
 
-### Analyzing the Bundle Size
+  | Utility | Purpose |
+  |---|---|
+  | `bg-page` / `bg-surface` | page background and raised panels |
+  | `text-primary` / `text-secondary` / `text-muted` | the three text levels |
+  | `border-line` / `border-line-strong` | hairline and emphasised borders |
+  | `text-accent` / `bg-accent` / `text-accent-soft` | the single amber accent |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Primitives: `.container-x`, `.rule` (hairline), `.eyebrow`, `.label`, `.card`, `.btn`
+  / `.btn-primary` / `.btn-ghost`, `.link`, `.reveal`.
+- Changing the accent means editing `--accent` (and `--on-accent`, the text colour that
+  sits on top of an accent fill) in both `:root` and `.dark`.
 
-### Making a Progressive Web App
+All text/background pairs meet **WCAG AA** (≥ 4.5:1) in both themes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Theme preference is resolved as: saved choice → OS setting → dark, and is persisted in
+`localStorage`. An inline script in `index.html` applies it before first paint so there
+is no flash of the wrong theme.
 
-### Advanced Configuration
+## Project structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+index.html                     Vite entry (fonts, meta, no-flash theme script)
+src/
+  main.tsx                     React root
+  App.tsx                      Page composition (Header / main / footer)
+  index.css                    Design tokens + primitives (Tailwind v4)
+  data/portfolio.ts            ← your content
+  context/ThemeContext.tsx     Theme state + persistence
+  hooks/useActiveSection.ts    Scroll-spy for the nav
+  components/
+    Header.tsx  Hero.tsx  About.tsx  Skills.tsx  Experience.tsx
+    Projects.tsx  CodingCompetitions.tsx  Achievements.tsx  Testimonials.tsx
+    Contact.tsx                Footer + call to action
+    BackToTop.tsx  ThemeToggle.tsx
+    common/                    Section, SectionHeading, Reveal
+  assets/                      SVG icon components + profile photo
+public/                        favicon + résumé PDF
+```
 
-### Deployment
+`Experience`, `Experience`'s education block, `Achievements` and `Testimonials` are all
+thin wrappers over data — restyle them in one file and every entry follows.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Accessibility & performance
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Every text/background pair meets WCAG AA contrast in both themes.
+- Scroll reveals respect `prefers-reduced-motion`.
+- Decorative marks are `aria-hidden`; all interactive elements have visible focus rings
+  and accessible labels.
+- No animation or UI libraries — the whole page is React, Tailwind and CSS.
